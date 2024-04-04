@@ -1,0 +1,46 @@
+To create a calendar-like date picker in HTML where only weekdays (Monday to Friday) are enabled for selection, you can use the `<input type="date">` element along with some JavaScript to disable weekends. Here's a basic example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Tool</title>
+</head>
+<body>
+    <h1>Booking Tool</h1>
+    <form>
+        <label for="booking_date">Select a date (Monday to Friday only):</label><br>
+        <input type="date" id="booking_date" name="booking_date" required><br><br>
+        <input type="submit" value="Book">
+    </form>
+
+    <script>
+        // Function to disable weekends in the date picker
+        function disableWeekends() {
+            var inputDate = document.getElementById('booking_date');
+            inputDate.addEventListener('input', function() {
+                var selectedDate = new Date(this.value);
+                var dayOfWeek = selectedDate.getDay();
+                if (dayOfWeek === 0 || dayOfWeek === 6) {
+                    alert('Please select a date from Monday to Friday.');
+                    this.value = ''; // Clear the selected date
+                }
+            });
+        }
+
+        // Call the function to disable weekends
+        disableWeekends();
+    </script>
+</body>
+</html>
+```
+
+In this code:
+
+- We have a `<form>` containing a label and an `<input type="date">` element for selecting a date.
+- We use JavaScript to add an event listener to the date input field. When a date is selected (`input` event), the script checks if it's a Saturday or Sunday (0 for Sunday, 6 for Saturday). If it is, an alert is shown to the user, and the selected date is cleared.
+- The `disableWeekends()` function is called to set up the event listener when the page loads.
+
+This code ensures that only weekdays (Monday to Friday) can be selected in the date picker.
