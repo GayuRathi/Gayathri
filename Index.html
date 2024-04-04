@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Booking Form</title> 
+        <style>
+            form{
+                max-width: 500px;
+                margin: 0 auto;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            label{
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            select{
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            input[type="submit"]{
+                width: calc(100% - 14px);
+            }
+            input[type="submit"]{
+                background-color: #4caf50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            input[type="submit"] : :hover{
+                background-color: #45a049;
+            }
+            input[type="checkbox"]{
+                margin-right: 3px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1> Marriott Booking Management System</h1>
+        <form action="#" method="post" onsubmit="showMessage()">
+            <label for="first_name">First Name:</label>
+            <br>
+            <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required><br>
+            <br>
+            <label for="last_name">Last Name:</label>
+            <br>
+            <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required><br>
+            <br>
+            <label for="email">Email:</label>
+            <br>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required><br>
+            <br>
+            <label for="phone">Phone Number:</label>
+            <br>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required><br>
+            <br>
+            <label for="dob">Date of Birth:</label>
+            <br>
+            <input type="date" id="dob" name="dob" placeholder="Enter your date of birth" required><br>
+            <br>
+            <label for="marsha_code">MARSHA Code:</label>
+            <br>
+            <input type="text" id="marsha_code" name="marsha_code" placeholder="Enter your MARSHA CODE" required><br>
+            <br>
+            <label for="region">Region/Continent:</label>
+            <br>
+            <select id="region" name="region" required>
+                <option value="India">India</option>
+                <option value="Europe">Europe</option>
+                <option value="North America">North America</option>
+                <option value="South America">South America</option>
+                <option value="Japan">Japan</option>
+                <option value="United States">United States</option>
+                <option value="Denmark">Denmark</option>
+            </select><br>
+            <br>
+            <label for="local_fiscal_interface">Local Fiscal Interface:</label>
+            <br>
+            <select id="local_fiscal_interface" name="local_fiscal_interface" required>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select><br>
+            <br>
+            <label for="terms_conditions">I accept the terms and conditions</label>
+            <br>
+            <input type="checkbox" id="terms_conditions" name="terms_conditions" required><br>
+            <br>
+            <input type="submit" value="Submit">
+            
+        </form>
+        <div id="submission_message" style="display: none;">Your form is successfully submitted.</div>
+        <script>
+            function showMessage(){
+                document.getElementById('submission_message').style.display = 'block';
+            }
+                    </script>
+
+    </body>
+</html>
