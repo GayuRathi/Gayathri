@@ -1,0 +1,67 @@
+To visually indicate that Saturdays and Sundays are disabled in the date picker, you can use CSS to style the disabled dates differently. Unfortunately, there's no direct way to style disabled dates in HTML date inputs, as their appearance is controlled by the browser. However, you can use JavaScript to dynamically add a class to disabled dates and then style those dates with CSS.
+
+Here's the updated HTML code with CSS and JavaScript to achieve this:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Tool</title>
+    <style>
+        /* Style for disabled dates */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: grayscale(100%);
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Booking Tool</h1>
+    <form>
+        <label for="booking_date">Select a date (Monday to Friday only):</label><br>
+        <input type="date" id="booking_date" name="booking_date" required min="" max=""><br><br>
+        <input type="submit" value="Book">
+    </form>
+
+    <script>
+        // Function to disable weekends and set the date range
+        function setupDatePicker() {
+            var inputDate = document.getElementById('booking_date');
+            
+            // Set the minimum date to today
+            var today = new Date().toISOString().split('T')[0];
+            inputDate.setAttribute('min', today);
+            
+            // Set the maximum date to one month from today
+            var nextMonth = new Date();
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            var maxDate = nextMonth.toISOString().split('T')[0];
+            inputDate.setAttribute('max', maxDate);
+
+            // Add event listener to disable weekends and style disabled dates
+            inputDate.addEventListener('input', function() {
+                var selectedDate = new Date(this.value);
+                var dayOfWeek = selectedDate.getDay();
+                if (dayOfWeek === 0 || dayOfWeek === 6) {
+                    alert('Please select a date from Monday to Friday.');
+                    this.value = ''; // Clear the selected date
+                }
+            });
+        }
+
+        // Call the function to set up the date picker
+        setupDatePicker();
+    </script>
+</body>
+</html>
+```
+
+In this updated code:
+
+- We use CSS to style the date picker's calendar picker indicator (`::-webkit-calendar-picker-indicator`). We apply a grayscale filter and reduce the opacity to visually indicate that the dates are disabled. Additionally, we set the cursor to `not-allowed` to indicate that the dates cannot be selected.
+- We keep the JavaScript logic the same as before to disable weekends and set the date range.
+
+With these changes, Saturdays and Sundays will be visually indicated as disabled in the date picker, and users will not be able to select them.
