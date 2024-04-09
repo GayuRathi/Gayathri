@@ -1,0 +1,64 @@
+To enable users to select only weekdays (Monday to Friday) and prevent selection of weekend days (Saturday and Sunday) for the current month and the next month, you can use JavaScript to dynamically set the `min` and `max` attributes of the date input element based on the current date and the next month. Here's the HTML code to achieve that:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Weekdays Only</title>
+</head>
+<body>
+    <h1>Select Weekdays Only</h1>
+    <form>
+        <label for="booking_date">Select a date (Weekdays only):</label><br>
+        <input type="date" id="booking_date" name="booking_date" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        // Function to set the minimum and maximum date range
+        function setMinMaxDate() {
+            var inputDate = document.getElementById('booking_date');
+            var today = new Date();
+            var currentMonth = today.getMonth();
+            var nextMonth = new Date(today.getFullYear(), currentMonth + 1, 1);
+            var nextMonthLastDay = new Date(today.getFullYear(), currentMonth + 2, 0);
+            var minDate = new Date(today.getFullYear(), currentMonth, 1);
+            var maxDate = nextMonthLastDay;
+            
+            // Set minimum date to the first day of the current month
+            inputDate.setAttribute('min', minDate.toISOString().split('T')[0]);
+            
+            // Set maximum date to the last day of the next month
+            inputDate.setAttribute('max', maxDate.toISOString().split('T')[0]);
+        }
+
+        // Function to disable weekends
+        function disableWeekends() {
+            var inputDate = document.getElementById('booking_date');
+            inputDate.addEventListener('input', function() {
+                var selectedDate = new Date(this.value);
+                var dayOfWeek = selectedDate.getDay();
+                // Disable selection if Saturday or Sunday is selected
+                if (dayOfWeek === 6 || dayOfWeek === 0) {
+                    alert('Please select a weekday.');
+                    this.value = ''; // Clear the selected date
+                }
+            });
+        }
+
+        // Call functions to set date range and disable weekends
+        setMinMaxDate();
+        disableWeekends();
+    </script>
+</body>
+</html>
+```
+
+In this code:
+
+- The `setMinMaxDate()` function calculates the minimum and maximum dates based on the current date. It sets the minimum date to the first day of the current month and the maximum date to the last day of the next month.
+- The `disableWeekends()` function disables weekends (Saturday and Sunday) when the user selects a date by adding an event listener to the date input element.
+- When the user selects a weekend day, an alert is shown, and the selected date is cleared.
+- Users are guided to select only weekdays, as weekends are automatically disabled.
